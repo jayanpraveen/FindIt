@@ -1,0 +1,22 @@
+---
+spring:
+  application:
+    name: "Eureka-Discovery-Service"
+  output:
+    ansi:
+      enabled: ALWAYS
+
+eureka:
+  client:
+    fetch-registry: "false"
+    register-with-eureka: "false"
+server:
+  port: "8761"
+
+logging:
+  level:
+    org:
+      springframework:
+        boot:
+          autoconfigure:
+            logging: ERROR

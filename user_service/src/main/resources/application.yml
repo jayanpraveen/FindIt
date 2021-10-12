@@ -1,0 +1,9 @@
+---
+spring:
+  application:
+    name: "User-Detail-Service"
+  output:
+    ansi:
+      enabled: ALWAYS
+server:
+  port: 8082
