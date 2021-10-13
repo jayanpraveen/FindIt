@@ -1,5 +1,17 @@
 ---
 spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: iambatman
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/findit
+  jpa:
+    properties:
+      hibernate:
+        dialet: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: update
+
   application:
     name: "User-Detail-Service"
   output:
@@ -7,3 +19,10 @@ spring:
       enabled: ALWAYS
 server:
   port: 8082
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type: TRACE
