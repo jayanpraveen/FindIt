@@ -18,6 +18,10 @@ public class BookService {
 		this.bookRepo = bookRepo;
 	}
 
+	public Book saveBook(Book book) {
+		return bookRepo.save(book);
+	}
+
 	public List<Book> getAllBooks() {
 		return bookRepo.findAll();
 	}

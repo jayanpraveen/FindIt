@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import me.realpraveen.user_service.Model.User;
 import me.realpraveen.user_service.Repository.UserRepository;
@@ -18,7 +19,7 @@ public class UserService {
 		this.userRepo = userRepo;
 	}
 
-	public User insertUser(User user) {
+	public User saveUser(@RequestBody User user) {
 		return userRepo.save(user);
 	}
 

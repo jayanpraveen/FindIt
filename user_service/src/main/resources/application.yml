@@ -4,7 +4,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: iambatman
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/findit
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/findit_users
   jpa:
     properties:
       hibernate:
