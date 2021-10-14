@@ -1,8 +1,8 @@
 package me.realpraveen.book_detail_service.Model;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+// import javax.persistence.EnumType;
+// import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,7 +40,7 @@ public class Book {
 	@Size(min = 10, max = 13, message = "ISBN should be 10 to 13 characters")
 	private int ISBN;
 
-	@Enumerated(EnumType.STRING)
-	private Category category;
+	// @Enumerated(EnumType.STRING)
+	// private Category category;
 
 }
