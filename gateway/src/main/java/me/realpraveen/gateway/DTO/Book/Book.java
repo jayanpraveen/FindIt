@@ -1,4 +1,4 @@
-package me.realpraveen.gateway.DTO;
+package me.realpraveen.gateway.DTO.Book;
 
 import lombok.Data;
 
@@ -9,5 +9,5 @@ public class Book {
 	private String title;
 	private String authour;
 	private int ISBN;
-
+	private Category category;
 }

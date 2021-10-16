@@ -14,7 +14,7 @@ import me.realpraveen.user_service.Model.User;
 import me.realpraveen.user_service.Service.UserService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/user-service")
 public class UserController {
 
 	private UserService userService;

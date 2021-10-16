@@ -5,3 +5,25 @@ spring:
       enabled: ALWAYS
   application:
     name: "API-GATEWAY"
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: bookroute
+          uri: lb://Book-Detail-Service
+          predicates:
+            - Path=/api/books
+            - Method=GET
+          filters:
+            - StripPrefix=2
+            - PrefixPath=/book-service
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "gateway"

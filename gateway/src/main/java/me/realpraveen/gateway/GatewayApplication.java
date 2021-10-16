@@ -2,13 +2,13 @@ package me.realpraveen.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
-@EnableEurekaClient
+@EnableDiscoveryClient
 @SpringBootApplication
 public class GatewayApplication {
 
@@ -27,6 +27,13 @@ public class GatewayApplication {
 	WebClient.Builder loadBalancedWebClient() {
 		return WebClient.builder();
 	}
+
+	// @Bean
+	// RouteLocator cRouteLocator(RouteLocatorBuilder builder) {
+	// return builder.routes().route("path_route", r ->
+	// r.method(HttpMethod.GET).and().path("/api/**")
+	// .filters(f -> f.stripPrefix(1)).uri("lb://Book-Detail-Service")).build();
+	// }
 
 	// todo: add circuit breaker bean below
 
