@@ -29,6 +29,8 @@ public class Book {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long bookId;
 
+	private Long userId;
+
 	// @NotBlank
 	// @Max(value = 225, message = "Book title must be within 225 characters")
 	private String title;

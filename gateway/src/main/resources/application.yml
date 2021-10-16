@@ -11,7 +11,7 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: bookroute
+        - id: GET-book-route
           uri: lb://Book-Detail-Service
           predicates:
             - Path=/api/books
@@ -19,6 +19,24 @@ spring:
           filters:
             - StripPrefix=2
             - PrefixPath=/book-service
+
+        - id: GET-user-route
+          uri: lb://User-Detail-Service
+          predicates:
+            - Path=/api/users/{segment}
+            - Method=GET
+          filters:
+            - StripPrefix=2
+            - PrefixPath=/user-service
+
+        - id: POST-user-route
+          uri: lb://User-Detail-Service
+          predicates:
+            - Path=/api/users
+            - Method=POST
+          filters:
+            - StripPrefix=2
+            - PrefixPath=/user-service
 management:
   endpoint:
     gateway:

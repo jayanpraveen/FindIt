@@ -16,9 +16,11 @@ public class BookServiceClient {
 	private final WebClient.Builder webClient;
 
 	private final String BOOK_SERVICE_URI = "lb://Book-Detail-Service/book-service/";
+	private final String USER_SERVICE_URI = "lb://User-Detail-Service/user-service/";
 
 	public Mono<Book> getBookDetails(Long id) {
-		return webClient.build().get().uri(BOOK_SERVICE_URI + id)
+		return webClient.build().get()
+				.uri(BOOK_SERVICE_URI + id)
 				.accept(MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN).retrieve()
 				.onStatus(httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus), clientResponse -> Mono.empty())
 				.bodyToMono(Book.class);

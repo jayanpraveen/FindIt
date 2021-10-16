@@ -1,10 +1,11 @@
 package me.realpraveen.user_service.Controller;
 
-import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,10 +25,10 @@ public class UserController {
 		this.userService = userService;
 	}
 
-	@GetMapping
-	public ResponseEntity<String> getAllUsers() {
-		List<User> users = userService.getAllUsers();
-		return ResponseEntity.ok("ALl users List goes here");
+	@GetMapping("/{userId}")
+	public ResponseEntity<?> getUserInfo(@PathVariable Long userId) {
+		User user = userService.getUserInfo(userId);
+		return ResponseEntity.ok(user != null ? user : Map.of("error", "Not found! have a 🍕"));
 	}
 
 	@PostMapping
