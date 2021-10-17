@@ -15,7 +15,7 @@ spring:
           uri: lb://Book-Detail-Service
           predicates:
             - Path=/api/books
-            - Method=GET
+            - Method=GET,POST
           filters:
             - StripPrefix=2
             - PrefixPath=/book-service
