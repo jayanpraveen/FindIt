@@ -28,10 +28,8 @@ public class BookServiceClient {
 					.bodyToMono(Book.class);
 
 		Mono<User> userDetail = bookDetail.flatMap(b -> getUserDetails(b.getUserId()));
-		
-		var bookDetails = Mono.zip(bookDetail, userDetail, (b,u) -> new BookUserCombiner(b,u));
 			
-		return bookDetails;
+		return Mono.zip(bookDetail, userDetail, (b,u) -> new BookUserCombiner(b,u));
 	}
 
 	private Mono<User> getUserDetails(Long userId) {
@@ -42,11 +40,10 @@ public class BookServiceClient {
 					.bodyToMono(User.class);	
 
 		return userDetail;
-
 	}
 
-	public Mono getAllBooksOfUser() {
-		return null;
+	public Mono<Long> getAllBooksOfUser(Long userId) {
+		return Mono.just(userId);
 	}
 
 

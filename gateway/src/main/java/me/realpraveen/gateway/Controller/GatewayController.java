@@ -23,14 +23,16 @@ public class GatewayController {
 		this.bookClient = bookClient;
 	}
 
+	@GetMapping
+	public ResponseEntity<Mono<Long>> getAllBooksOfUser(@RequestParam(name = "userid") Long userId) {
+		if (userId == null)
+			return null;
+		return ResponseEntity.ok(bookClient.getAllBooksOfUser(userId));
+	}
+
 	@GetMapping("/{bookId}")
 	public ResponseEntity<Mono<BookUserCombiner>> getBookDetails(@PathVariable Long bookId) {
 		return ResponseEntity.ok(bookClient.getBookDetails(bookId));
-	}
-
-	@GetMapping("/{userId}")
-	public ResponseEntity<?> getAllBooksOfUser(@RequestParam Long userId) {
-		return ResponseEntity.ok(null);
 	}
 
 }
