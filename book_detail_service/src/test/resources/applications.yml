@@ -1,0 +1,7 @@
+---
+spring:
+  application:
+    name: Book-Detail-Service
+    output:
+      ansi:
+        enabled: ALWAYS

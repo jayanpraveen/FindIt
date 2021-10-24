@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import me.realpraveen.gateway.Applications.BookServiceClient;
 import me.realpraveen.gateway.DTO.BookUserCombiner;
+import me.realpraveen.gateway.DTO.Book.Book;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -21,6 +23,11 @@ public class GatewayController {
 	@Autowired
 	public GatewayController(BookServiceClient bookClient) {
 		this.bookClient = bookClient;
+	}
+
+	@GetMapping("/all")
+	public Flux<Book> getAllBooks() {
+		return bookClient.getAllBooks();
 	}
 
 	@GetMapping

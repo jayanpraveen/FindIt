@@ -10,6 +10,7 @@ public class BookDetailServiceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BookDetailServiceApplication.class, args);
+		// SpringApplication.setWebApplicationType(WebApplicationType.REACTIVE)
 	}
 
 }

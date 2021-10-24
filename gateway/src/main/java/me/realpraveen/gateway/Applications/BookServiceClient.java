@@ -9,19 +9,20 @@ import lombok.RequiredArgsConstructor;
 import me.realpraveen.gateway.DTO.BookUserCombiner;
 import me.realpraveen.gateway.DTO.Book.Book;
 import me.realpraveen.gateway.DTO.User.User;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Component
 @RequiredArgsConstructor
 public class BookServiceClient {
 
-	private final WebClient.Builder webClient;
+	private final WebClient webClient;
 
 	private final String BOOK_SERVICE_URI = "lb://Book-Detail-Service/book-service/";
 	private final String USER_SERVICE_URI = "lb://User-Detail-Service/user-service/";
 
 	public Mono<BookUserCombiner> getBookDetails(Long id) {
-		Mono<Book> bookDetail = webClient.build().get()
+		Mono<Book> bookDetail = webClient.get()
 					.uri(BOOK_SERVICE_URI + id)
 					.accept(MediaType.APPLICATION_JSON).retrieve()
 					.onStatus(httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus), clientResponse -> Mono.empty())
@@ -34,12 +35,20 @@ public class BookServiceClient {
 
 	private Mono<User> getUserDetails(Long userId) {
 
-		Mono<User> userDetail = webClient.build().get()
+		Mono<User> userDetail = webClient.get()
 					.uri(USER_SERVICE_URI + userId)
 					.accept(MediaType.APPLICATION_JSON).retrieve()
 					.bodyToMono(User.class);	
 
 		return userDetail;
+	}
+
+	public Flux<Book> getAllBooks(){
+		return webClient.get()
+						.uri(BOOK_SERVICE_URI)
+						// .uri("http://localhost:8081/book-service")
+						.retrieve()
+						.bodyToFlux(Book.class);		
 	}
 
 	public Mono<Long> getAllBooksOfUser(Long userId) {

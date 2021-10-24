@@ -29,8 +29,8 @@ public class GatewayApplication {
 
 	@Bean
 	@LoadBalanced
-	WebClient.Builder loadBalancedWebClient() {
-		return WebClient.builder();
+	WebClient loadBalancedWebClient(WebClient.Builder builder) {
+		return builder.build();
 	}
 
 	@GetMapping("/hellod")
