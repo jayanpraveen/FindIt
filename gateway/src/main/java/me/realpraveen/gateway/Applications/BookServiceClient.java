@@ -16,17 +16,18 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class BookServiceClient {
 
-	private final WebClient webClient;
+	private final WebClient.Builder webClient;
 
-	private final String BOOK_SERVICE_URI = "lb://Book-Detail-Service/book-service/";
-	private final String USER_SERVICE_URI = "lb://User-Detail-Service/user-service/";
+	private final String BOOK_SERVICE_URI = "lb://Book-Detail-Service/book-service";
+	private final String USER_SERVICE_URI = "lb://User-Detail-Service/user-service";
 
 	public Mono<BookUserCombiner> getBookDetails(Long id) {
-		Mono<Book> bookDetail = webClient.get()
-					.uri(BOOK_SERVICE_URI + id)
-					.accept(MediaType.APPLICATION_JSON).retrieve()
-					.onStatus(httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus), clientResponse -> Mono.empty())
-					.bodyToMono(Book.class);
+		Mono<Book> bookDetail = webClient.build()
+										 .get()
+										 .uri(BOOK_SERVICE_URI + "/" + id)
+										 .accept(MediaType.APPLICATION_JSON).retrieve()
+										 .onStatus(httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus), clientResponse -> Mono.empty())
+										 .bodyToMono(Book.class);
 
 		Mono<User> userDetail = bookDetail.flatMap(b -> getUserDetails(b.getUserId()));
 			
@@ -35,25 +36,27 @@ public class BookServiceClient {
 
 	private Mono<User> getUserDetails(Long userId) {
 
-		Mono<User> userDetail = webClient.get()
-					.uri(USER_SERVICE_URI + userId)
-					.accept(MediaType.APPLICATION_JSON).retrieve()
-					.bodyToMono(User.class);	
-
-		return userDetail;
+		return webClient.build()
+						.get()
+						.uri(USER_SERVICE_URI + "/" +userId)
+						.accept(MediaType.APPLICATION_JSON).retrieve()
+						.bodyToMono(User.class);
+							
 	}
 
-	public Flux<Book> getAllBooks(){
-		return webClient.get()
+	public Flux<Book> getAllBooks() {
+
+		return webClient.build()
+					    .get()
 						.uri(BOOK_SERVICE_URI)
-						// .uri("http://localhost:8081/book-service")
-						.retrieve()
+						.accept(MediaType.APPLICATION_JSON).retrieve()
+						.onStatus(httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus), clientResponse -> Mono.empty())
 						.bodyToFlux(Book.class);		
+
 	}
 
 	public Mono<Long> getAllBooksOfUser(Long userId) {
 		return Mono.just(userId);
 	}
-
 
 }

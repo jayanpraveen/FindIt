@@ -25,9 +25,9 @@ public class GatewayController {
 		this.bookClient = bookClient;
 	}
 
-	@GetMapping("/all")
-	public Flux<Book> getAllBooks() {
-		return bookClient.getAllBooks();
+	@GetMapping("/allbooks")
+	public ResponseEntity<Flux<Book>> getAllBooks() {
+		return ResponseEntity.ok(bookClient.getAllBooks());
 	}
 
 	@GetMapping
@@ -37,7 +37,7 @@ public class GatewayController {
 		return ResponseEntity.ok(bookClient.getAllBooksOfUser(userId));
 	}
 
-	@GetMapping("/{bookId}")
+	@GetMapping("/book/{bookId}")
 	public ResponseEntity<Mono<BookUserCombiner>> getBookDetails(@PathVariable Long bookId) {
 		return ResponseEntity.ok(bookClient.getBookDetails(bookId));
 	}

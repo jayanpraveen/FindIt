@@ -1,7 +1,9 @@
 ---
 spring:
-  application:
-    name: Book-Detail-Service
-    output:
+  output:
       ansi:
         enabled: ALWAYS
+        
+  application:
+    name: Book-Detail-Service
+    

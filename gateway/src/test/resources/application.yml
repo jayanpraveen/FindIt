@@ -3,3 +3,8 @@ spring:
   output:
     ansi:
       enabled: ALWAYS
+      
+stubrunner:
+  idsToServiceIds:
+   '[book_detail_service]': "Book-Detail-Service"
+   '[user_detail_service]': "User-Detail-Service"
