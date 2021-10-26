@@ -10,14 +10,12 @@ import org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import lombok.extern.slf4j.Slf4j;
 import me.realpraveen.gateway.Applications.BookServiceClient;
 import me.realpraveen.gateway.DTO.Book.Book;
-
+import me.realpraveen.gateway.DTO.Book.Category;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
-@Slf4j
 @DirtiesContext
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
@@ -33,7 +31,6 @@ public class GatewayApplicationTests {
     static {
         System.setProperty("eureka.client.enabled", "false");
         System.setProperty("spring.cloud.gateway.discovery.locator.enabled", "false");
-        log.info(new StubRunnerProperties().toString());
     }
 
     @Autowired
@@ -44,13 +41,26 @@ public class GatewayApplicationTests {
     }
 
     @Test
-    public void contextLoads() throws Exception {
+    public void shouldReturnAllBooks() {
 
         Flux<Book> book = this.bookClient.getAllBooks();
 
-        StepVerifier.create(book)
-                .expectNextMatches(b -> b.getUserId() == 675L && b.getTitle().equalsIgnoreCase("awesome title"))
-                .verifyComplete();
+        StepVerifier.create(book).expectNextMatches(b1 -> b1.getAuthour().equals("Jimmy"))
+                .expectNextMatches(b2 -> b2.getAuthour().equals("cow")).verifyComplete();
+
+        StepVerifier.create(book).expectNext(new Book(12L, 45L, "Random fandom", "Jimmy", 8422, Category.SCIENCE))
+                .expectNext(new Book(10L, 675L, "awesome title", "cow", 2345, Category.UNLISTED)).verifyComplete();
+    }
+
+    @Test
+    void shouldReturnBookDetails() {
+
+    }
+
+    @Test
+    void shouldReturnBooksForUserId() {
+
+        // Flux<Book> books = this.bookClient.getAllBooksOfUser(12L);
 
     }
 

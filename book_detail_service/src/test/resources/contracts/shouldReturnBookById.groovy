@@ -6,11 +6,11 @@ import org.springframework.http.MediaType
 
 Contract.make {
 
-    description("should return all books")
+    description("should return book by Id")
 
     request {
         method("GET")
-        url("/book-service")
+        url("/book-service/12")
     }
 
     response {
@@ -19,10 +19,7 @@ Contract.make {
             contentType(MediaType.APPLICATION_JSON_VALUE)
         }
 
-        body([ 
-            [ "bookId":12,"userId":45,"title":"Random fandom","authour":"Jimmy","isbn":8422,"category":"SCIENCE" ] ,
-            [ "bookId":10,"userId":675,"title":"awesome title","authour":"cow","isbn":2345,"category":"UNLISTED" ] 
-            ])
+        body(["bookId":12,"userId":45,"title":"Random fandom","authour":"Jimmy","isbn":8422,"category":"SCIENCE"])
     }
 
 }

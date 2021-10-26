@@ -1,4 +1,3 @@
-
 import org.springframework.cloud.contract.spec.Contract
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -6,11 +5,11 @@ import org.springframework.http.MediaType
 
 Contract.make {
 
-    description("should return all books")
+    description("should return list of books by userId")
 
     request {
         method("GET")
-        url("/book-service")
+        url("/book-service/userbooks/675")
     }
 
     response {
@@ -19,10 +18,11 @@ Contract.make {
             contentType(MediaType.APPLICATION_JSON_VALUE)
         }
 
-        body([ 
-            [ "bookId":12,"userId":45,"title":"Random fandom","authour":"Jimmy","isbn":8422,"category":"SCIENCE" ] ,
+        body([
             [ "bookId":10,"userId":675,"title":"awesome title","authour":"cow","isbn":2345,"category":"UNLISTED" ] 
             ])
     }
 
 }
+
+

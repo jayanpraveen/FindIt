@@ -36,7 +36,13 @@ public class BookContoller {
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getBookById(@PathVariable Long id) {
 		var d = bookService.getBookById(id);
-		return ResponseEntity.ok( d != null ?  d : new JSONObject(Map.of("error", "not found")));
+		return ResponseEntity.ok(d != null ? d : new JSONObject(Map.of("error", "not found")));
+	}
+
+	@GetMapping("/userbooks/{id}")
+	public ResponseEntity<?> getBooksOfUser(@PathVariable Long id) {
+		var d = bookService.getAllBooksOfUser(id);
+		return ResponseEntity.ok(!d.isEmpty() ? d : new JSONObject(Map.of("error", "not found")));
 	}
 
 	@PostMapping
