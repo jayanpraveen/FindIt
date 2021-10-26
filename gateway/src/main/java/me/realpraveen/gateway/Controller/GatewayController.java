@@ -1,6 +1,7 @@
 package me.realpraveen.gateway.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,8 @@ import me.realpraveen.gateway.DTO.BookUserCombiner;
 import me.realpraveen.gateway.DTO.Book.Book;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/gateway")
@@ -41,5 +44,12 @@ public class GatewayController {
 	public ResponseEntity<Mono<BookUserCombiner>> getBookDetails(@PathVariable Long bookId) {
 		return ResponseEntity.ok(bookClient.getBookDetails(bookId));
 	}
+
+	@PostMapping("/book")
+	public ResponseEntity<Object> postNewBook(@RequestBody Book book) {
+		bookClient.postNewBook(book);
+		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
+
 
 }

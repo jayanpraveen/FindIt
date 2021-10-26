@@ -18,8 +18,10 @@ public class BookService {
 		this.bookRepo = bookRepo;
 	}
 
-	public Book saveBook(Book book) {
-		return bookRepo.save(book);
+	public void saveBook(Book book) {
+		if (doesBookExist(book.getBookId()))
+			return;
+		bookRepo.save(book);
 	}
 
 	public List<Book> getAllBooks() {
@@ -32,6 +34,10 @@ public class BookService {
 
 	public List<Book> getAllBooksOfUser(Long userId) {
 		return bookRepo.findByUserId(userId);
+	}
+
+	private boolean doesBookExist(Long id) {
+		return bookRepo.existsById(id);
 	}
 
 }

@@ -5,7 +5,6 @@ target/
 !**/src/test/**/target/
 frontend/
 README.MD
-runit.sh
 stub-runner.jar
 
 ### STS ###

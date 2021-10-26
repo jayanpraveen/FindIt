@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,19 +36,20 @@ public class BookContoller {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getBookById(@PathVariable Long id) {
-		var d = bookService.getBookById(id);
-		return ResponseEntity.ok(d != null ? d : new JSONObject(Map.of("error", "not found")));
+		var book = bookService.getBookById(id);
+		return ResponseEntity.ok(book != null ? book : new JSONObject(Map.of("error", "not found")));
 	}
 
 	@GetMapping("/userbooks/{id}")
 	public ResponseEntity<?> getBooksOfUser(@PathVariable Long id) {
-		var d = bookService.getAllBooksOfUser(id);
-		return ResponseEntity.ok(!d.isEmpty() ? d : new JSONObject(Map.of("error", "not found")));
+		var book = bookService.getAllBooksOfUser(id);
+		return ResponseEntity.ok(!book.isEmpty() ? book : new JSONObject(Map.of("error", "not found")));
 	}
 
 	@PostMapping
 	public ResponseEntity<Book> saveBook(@RequestBody Book book) {
-		return ResponseEntity.ok(bookService.saveBook(book));
+		bookService.saveBook(book);
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
 }

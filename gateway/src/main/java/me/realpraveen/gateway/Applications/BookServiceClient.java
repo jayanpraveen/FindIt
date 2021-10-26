@@ -1,5 +1,6 @@
 package me.realpraveen.gateway.Applications;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -57,6 +58,16 @@ public class BookServiceClient {
 
 	public Mono<Long> getAllBooksOfUser(Long userId) {
 		return Mono.just(userId);
+	}
+
+	public Mono<Book> postNewBook(Book book){
+		return webClient.build()
+					.post()
+					.uri(BOOK_SERVICE_URI)
+					.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+					.body(Mono.just(book), Book.class)
+					.retrieve()
+					.bodyToMono(Book.class);
 	}
 
 }
