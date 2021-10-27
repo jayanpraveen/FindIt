@@ -1,22 +1,23 @@
 import org.springframework.cloud.contract.spec.Contract
-import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
+import org.springframework.http.HttpStatus
 
 
 Contract.make {
 
-    description("should post book")
+    description("should save user")
 
     request {
         method("POST")
-  
-        url("/book-service")
-		
-		body([ "bookId":849,"userId":4523,"title":"Random fandom","authour":"Jimmys","isbn":8422,"category":"SCIENCE" ])
-		
+
+        url("/user-service")
+
 		headers {
 			contentType(MediaType.APPLICATION_JSON_VALUE)
 		}
+
+		body([ "userId":12,"name":"david","email":"dave@dom.com", "password":"2bd%osj", "institute":"SCHOOL","instituteName":"somescl" ])
+		
     }
 
     response {
@@ -24,4 +25,3 @@ Contract.make {
     }
 
 }
-

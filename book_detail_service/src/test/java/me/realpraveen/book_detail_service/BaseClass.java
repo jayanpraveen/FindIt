@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -26,6 +27,7 @@ import me.realpraveen.book_detail_service.Model.Category;
 import me.realpraveen.book_detail_service.Repository.BookRepository;
 
 @DirtiesContext
+@AutoConfigureWebTestClient
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public abstract class BaseClass {
@@ -73,7 +75,7 @@ public abstract class BaseClass {
 
 		testClient = WebTestClient.bindToController(contoller).build();
 
-		Book bookBody = new Book(849L, 4523L, "Random fandom", "Jimmys", 8422, Category.SCIENCE);
+		Book bookBody = new Book(849L, 4523L, "Random fandom", "Jimmy", 8422, Category.SCIENCE);
 
 		testClient.post()
 		          .uri("/book-service")

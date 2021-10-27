@@ -13,7 +13,7 @@ spring:
       ddl-auto: update
 
   application:
-    name: "User-Detail-Service"
+    name: User-Detail-Service
   output:
     ansi:
       enabled: ALWAYS

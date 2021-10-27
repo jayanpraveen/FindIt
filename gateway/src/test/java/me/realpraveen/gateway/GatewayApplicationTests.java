@@ -19,12 +19,13 @@ import me.realpraveen.gateway.DTO.Book.Category;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
-@AutoConfigureWebTestClient
 @DirtiesContext
 @SpringBootTest
+@AutoConfigureWebTestClient
 @ExtendWith(SpringExtension.class)
-@AutoConfigureStubRunner(ids = 
-        {"me.realpraveen:book_detail_service:+:8081"}, stubsMode = StubRunnerProperties.StubsMode.LOCAL)
+@AutoConfigureStubRunner(
+        ids = {"me.realpraveen:book_detail_service:+:8081", "me.realpraveen:user_service:+:8082"}, 
+        stubsMode = StubRunnerProperties.StubsMode.LOCAL)
 public class GatewayApplicationTests {
 
     /**
@@ -68,7 +69,7 @@ public class GatewayApplicationTests {
 
        webTestClient = WebTestClient.bindToController(controller).build();
 
-       Book bookBody = new Book(849L, 4523L, "Random fandom", "Jimmys", 8422, Category.SCIENCE);
+       Book bookBody = new Book(849L, 4523L, "Random fandom", "Jimmy", 8422, Category.SCIENCE);
 
        webTestClient.post()
 		          .uri("/api/gateway/book")
