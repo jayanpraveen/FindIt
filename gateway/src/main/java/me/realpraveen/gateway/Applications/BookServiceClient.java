@@ -56,8 +56,15 @@ public class BookServiceClient {
 
 	}
 
-	public Mono<Long> getAllBooksOfUser(Long userId) {
-		return Mono.just(userId);
+	public Flux<Book> getAllBooksOfUser(Long userId) {
+
+		return webClient.build()
+		                 .get()
+		                 .uri(BOOK_SERVICE_URI + "/userbooks/" + userId)
+		                 .accept(MediaType.APPLICATION_JSON).retrieve()
+		                 .onStatus(httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus), clientResponse -> Mono.empty())
+		                 .bodyToFlux(Book.class);	
+
 	}
 
 	public Mono<Book> postNewBook(Book book){

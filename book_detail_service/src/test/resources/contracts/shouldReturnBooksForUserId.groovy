@@ -19,7 +19,8 @@ Contract.make {
         }
 
         body([
-            [ "bookId":10,"userId":675,"title":"awesome title","authour":"cow","isbn":2345,"category":"UNLISTED" ] 
+            [ "bookId":10,"userId":675,"title":"awesome title","authour":"cow","isbn":2345,"category":"UNLISTED" ],
+            [ "bookId":11,"userId":675,"title":"some book","authour":"alex","isbn": 9876,"category":"UNLISTED" ] 
             ])
     }
 

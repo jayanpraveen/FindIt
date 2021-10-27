@@ -62,8 +62,8 @@ public abstract class UserServiceApplicationTests {
 		RestAssuredWebTestClient.webTestClient(this.webtestClient);
 		RestAssuredMockMvc.webAppContextSetup(context);
 
-		User user = new User(12L, "david", "dave@dom.com", "$2bd%osj", Institution.SCHOOL, "somescl");
-		Mockito.when(userRepo.findById(12L)).thenReturn(Optional.of(user));
+		User user = new User(45L, "david", "dave@dom.com", "$2bd%osj", Institution.SCHOOL, "somescl");
+		Mockito.when(userRepo.findById(45L)).thenReturn(Optional.of(user));
 	}
 
 	@Test
@@ -71,10 +71,10 @@ public abstract class UserServiceApplicationTests {
 
 		webtestClient = WebTestClient.bindToController(controller).build();
 
-		UserInfo userInfo = new UserInfo(12L, "david", "dave@dom.com", Institution.SCHOOL, "somescl");
+		UserInfo userInfo = new UserInfo(45L, "david", "dave@dom.com", Institution.SCHOOL, "somescl");
 		
 		webtestClient.get()
-					 .uri("/user-service/12")
+					 .uri("/user-service/45")
 					 .header(MediaType.APPLICATION_JSON_VALUE)
 					 .exchange()
 					 .expectStatus().isOk()
@@ -88,7 +88,7 @@ public abstract class UserServiceApplicationTests {
 	
 		webtestClient = WebTestClient.bindToController(controller).build();
 
-		User userBody = new User(12L, "david", "dave@dom.com", "2bd%osj", Institution.SCHOOL, "somescl");
+		User userBody = new User(45L, "david", "dave@dom.com", "2bd%osj", Institution.SCHOOL, "somescl");
 		
 		webtestClient.post()
 					 .uri("/user-service")

@@ -9,7 +9,7 @@ Contract.make {
 
     request {
         method("GET")
-        url("/user-service/12")
+        url("/user-service/45")
     }
 
     response {
@@ -18,7 +18,7 @@ Contract.make {
             contentType(MediaType.APPLICATION_JSON_VALUE)
         }
 
-        body([ "userId":12,"name":"david","email":"dave@dom.com","institute":"SCHOOL","instituteName":"somescl" ])
+        body([ "userId":45,"name":"david","email":"dave@dom.com","institute":"SCHOOL","instituteName":"somescl" ])
     }
 
 }

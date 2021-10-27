@@ -62,10 +62,11 @@ public abstract class BaseClass {
 
 		Book b1 = new Book(12L, 45L, "Random fandom", "Jimmy", 8422, Category.SCIENCE);
 		Book b2 = new Book(10L, 675L, "awesome title", "cow", 2345, Category.UNLISTED);
+		Book b3 = new Book(11L, 675L, "some book", "alex", 9876, Category.SCIENCE);
 
 		Mockito.when(bookRepo.findAll()).thenReturn(List.of(b1, b2));
 		Mockito.when(bookRepo.findById(12L)).thenReturn(Optional.of(b1));
-		Mockito.when(bookRepo.findByUserId(675L)).thenReturn(List.of(b2));
+		Mockito.when(bookRepo.findByUserId(675L)).thenReturn(List.of(b2, b3));
 
 	}
 

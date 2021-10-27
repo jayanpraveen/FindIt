@@ -34,7 +34,7 @@ public class GatewayController {
 	}
 
 	@GetMapping
-	public ResponseEntity<Mono<Long>> getAllBooksOfUser(@RequestParam(name = "userid") Long userId) {
+	public ResponseEntity<Flux<Book>> getAllBooksOfUser(@RequestParam(name = "userid") Long userId) {
 		if (userId == null)
 			return null;
 		return ResponseEntity.ok(bookClient.getAllBooksOfUser(userId));
@@ -50,6 +50,5 @@ public class GatewayController {
 		bookClient.postNewBook(book);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
-
 
 }
